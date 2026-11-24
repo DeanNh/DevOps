@@ -5,8 +5,8 @@ BUILD = os.getenv("BUILD_ID", "dev-local")
 @app.route("/")
 def index():
     return jsonify(
-        service="sentra-digital-batam",
-        status="running",
+        service="sentra-digital-batam-v2",
+        status="running-v3",
         build=BUILD,
         time=datetime.datetime.now().isoformat(timespec="seconds"),
     )
@@ -14,4 +14,4 @@ def index():
 def health():
     return jsonify(status="ok"), 200
 if __name__ == "__main__":
-    app.run(host="127.0.0.1", port=5000)
+    app.run(host=os.getenv("HOST", "127.0.0.1"), port=int(os.getenv("PORT", "5000")))
